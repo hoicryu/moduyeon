@@ -10,6 +10,7 @@ const theme = {
     beige: '#E6E6E6',
     blueGreen: '#5D98A0',
     navy: '#112755',
+    gray: '#e0e0e0',
   },
 };
 
