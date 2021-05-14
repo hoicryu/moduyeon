@@ -21,20 +21,24 @@ function Login() {
     const emailFilter =
       /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     if (email.length <= 0 || password.length <= 0) {
-      return alert('필수값을 입력해주세요!');
+      alert('필수값을 입력해주세요!');
+      return false;
     }
     if (!emailFilter.test(email)) {
-      return alert('이메일 형식을 확인해주세요!');
+      alert('이메일 형식을 확인해주세요!');
+      return false;
     }
     if (password.length >= 0 && password.length <= 10) {
-      return alert('비밀번호는 10자리 이상 입력해주세요!');
+      alert('비밀번호는 10자리 이상 입력해주세요!');
+      return false;
     }
+    return true;
   };
 
   const history = useHistory();
 
   const tryOnLogin = () => {
-    validate();
+    if (!validate()) return;
     fetch(LOGIN_API)
       .then((res) => res.json())
       .then((res) => {
@@ -44,6 +48,7 @@ function Login() {
         const TOKEN = window.localStorage.getItem('TOKEN');
         if (TOKEN) {
           history.push('/forum');
+          window.location.reload();
         }
       })
       .catch((error) => console.error('Error:', error));
