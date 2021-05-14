@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login/Login';
 import ForumList from './pages/ForumList/ForumList';
-import ForumDetail from './pages/ForumList/ForumDetail';
+import ForumDetail from './pages/ForumDetail/ForumDetail';
 
 function Routes() {
   return (
