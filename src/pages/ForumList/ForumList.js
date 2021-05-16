@@ -105,7 +105,7 @@ function ForumList() {
           runFunction={setUpConditionOfsearch}
         />
         <ButtonBox size="small" buttonName="검색" runFunction={runSearch} />
-        <ButtonBox size="small" buttonName="초기화" />
+        <ButtonBox size="small" buttonName="초기화" runFunction={getPostData} />
       </div>
       <div className="PostWrapper">
         <ButtonBox size="small" buttonName="글작성" />
