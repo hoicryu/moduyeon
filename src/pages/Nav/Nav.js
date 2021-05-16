@@ -41,17 +41,19 @@ function Nav() {
 }
 
 const NavArea = styled.nav`
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2%;
+  width: 100vw;
   height: 70px;
   background-color: ${(props) => props.theme.color.gray};
 
   .logo {
     padding: 10px;
-    width: 170px;
-    height: 50px;
+    width: 120px;
+    height: 40px;
   }
 
   .toForum {
@@ -61,7 +63,7 @@ const NavArea = styled.nav`
 
   div {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     padding: 10px;
     cursor: pointer;
     transition: 1s;

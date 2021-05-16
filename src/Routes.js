@@ -15,6 +15,7 @@ function Routes() {
         <Route exact path="/" component={Login} />
         {TOKEN && <Route exact path="/forum" component={ForumList} />}
         {TOKEN && <Route exact path="/forum/:id" component={ForumDetail} />}
+        {TOKEN && <Route exact path="/forum/:id" component={ForumDetail} />}
       </Switch>
     </Router>
   );
