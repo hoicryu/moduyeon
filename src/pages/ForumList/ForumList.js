@@ -27,6 +27,7 @@ function ForumList() {
     },
     time: '시간',
   };
+  const [creatMode, setCreatMode] = useState(false);
 
   useEffect(() => {
     getPostData();
@@ -96,40 +97,85 @@ function ForumList() {
     history.push(`/forum/${id}`);
   };
 
+  const runCreatMode = () => {
+    setCreatMode(true);
+  };
+
+  const tags = [
+    {
+      name: 'general',
+      value: 'general',
+    },
+    {
+      name: 'tip',
+      value: 'tip',
+    },
+    {
+      name: 'bug',
+      value: 'bug',
+    },
+    {
+      name: 'learn',
+      value: 'learn',
+    },
+  ];
+
   return (
-    <ForumListArea>
-      <div className="inputBtnWrapper">
-        <InputBox
-          inputName="serch"
-          labelName="검색"
-          runFunction={setUpConditionOfsearch}
-        />
-        <ButtonBox size="small" buttonName="검색" runFunction={runSearch} />
-        <ButtonBox size="small" buttonName="초기화" runFunction={getPostData} />
-      </div>
-      <div className="PostWrapper">
-        <ButtonBox size="small" buttonName="글작성" />
-        <PostListWrapper>
-          <PostList postData={headData} />
-          {postData &&
-            postData.map((list, idx) => {
-              return (
-                <PostList
-                  key={list.id}
-                  postData={list}
-                  runFunction={goToDetailPage}
-                  name={list.id}
-                />
-              );
+    <>
+      {!creatMode ? (
+        <ForumListArea>
+          <div className="inputBtnWrapper">
+            <InputBox
+              inputName="serch"
+              labelName="검색"
+              runFunction={setUpConditionOfsearch}
+            />
+            <ButtonBox size="small" buttonName="검색" runFunction={runSearch} />
+            <ButtonBox
+              size="small"
+              buttonName="초기화"
+              runFunction={getPostData}
+            />
+          </div>
+          <div className="PostWrapper">
+            <ButtonBox
+              size="small"
+              buttonName="글작성"
+              runFunction={runCreatMode}
+            />
+            <PostListWrapper>
+              <PostList postData={headData} />
+              {postData &&
+                postData.map((list, idx) => {
+                  return (
+                    <PostList
+                      key={list.id}
+                      postData={list}
+                      goToDetailPage={goToDetailPage}
+                      name={list.id}
+                    />
+                  );
+                })}
+            </PostListWrapper>
+          </div>
+          <div className="pagenation">
+            <WhiteButtonBox buttonName="1" runFunction={setPageNation} />
+            <WhiteButtonBox buttonName="2" runFunction={setPageNation} />
+            <WhiteButtonBox buttonName="3" runFunction={setPageNation} />
+          </div>
+        </ForumListArea>
+      ) : (
+        <ForumCreatWrapper>
+          <InputBox inputName="title" labelName="제목" />
+          <textarea></textarea>
+          <select>
+            {tags.map((tag, idx) => {
+              return <option key={idx}>{tag.name}</option>;
             })}
-        </PostListWrapper>
-      </div>
-      <div className="pagenation">
-        <WhiteButtonBox buttonName="1" runFunction={setPageNation} />
-        <WhiteButtonBox buttonName="2" runFunction={setPageNation} />
-        <WhiteButtonBox buttonName="3" runFunction={setPageNation} />
-      </div>
-    </ForumListArea>
+          </select>
+        </ForumCreatWrapper>
+      )}
+    </>
   );
 }
 
@@ -161,6 +207,25 @@ const ForumListArea = styled.div`
 
 const PostListWrapper = styled.div`
   margin-top: 50px;
+`;
+
+const ForumCreatWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  textarea {
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+  }
+
+  select {
+    margin-top: 20px;
+  }
 `;
 
 export default ForumList;

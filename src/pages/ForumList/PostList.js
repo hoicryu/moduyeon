@@ -2,15 +2,14 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-function PostList({ postData, runFunction, name }) {
+function PostList({ postData, goToDetailPage, name }) {
   const { title, content, isLiked, tag } = postData;
+
   return (
-    <PostListArea onClick={() => runFunction(name)}>
-      <h4>{postData.length && title}</h4>
+    <PostListArea onClick={() => goToDetailPage(name)}>
+      <h4>{title}</h4>
       <span>{content.length >= 10 ? content.slice(0, 10) : content}</span>
-      <Tag className={postData.length && tag.color}>
-        {postData.length && tag.name}
-      </Tag>
+      <Tag className={tag.color}>{tag.name}</Tag>
       <span>시간</span>
     </PostListArea>
   );
