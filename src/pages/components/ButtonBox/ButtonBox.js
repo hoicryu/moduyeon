@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ButtonBox({ buttonName, runFunction }) {
+function ButtonBox({ buttonName, runFunction, size, enterKeyAcitive }) {
   return (
     <ButtonBoxArea>
-      <button onClick={runFunction}>{buttonName}</button>
+      <Button onClick={runFunction} size={size} onKeyPress={enterKeyAcitive}>
+        {buttonName}
+      </Button>
     </ButtonBoxArea>
   );
 }
@@ -12,15 +14,14 @@ function ButtonBox({ buttonName, runFunction }) {
 const ButtonBoxArea = styled.div`
   display: flex;
   padding: 10px;
-  width: 300px;
+`;
 
-  button {
-    padding: 5px 0;
-    width: 100%;
-    background-color: ${(props) => props.theme.color.navy};
-    font-size: 20px;
-    color: ${(props) => props.theme.color.white};
-  }
+const Button = styled.button`
+  padding: 5px;
+  width: ${(props) => (props.size === 'big' ? '300px' : 'auto')};
+  background-color: ${(props) => props.theme.color.navy};
+  font-size: 20px;
+  color: ${(props) => props.theme.color.white};
 `;
 
 export default ButtonBox;

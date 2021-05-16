@@ -37,7 +37,7 @@ function Login() {
 
   const history = useHistory();
 
-  const tryOnLogin = () => {
+  const tryOnLogin = (e) => {
     if (!validate()) return;
     fetch(LOGIN_API)
       .then((res) => res.json())
@@ -54,22 +54,35 @@ function Login() {
       .catch((error) => console.error('Error:', error));
   };
 
+  const enterKeyAcitive = (e) => {
+    if (e.keyCode == 13) {
+      tryOnLogin();
+    }
+  };
+
   return (
     <LoginArea>
       <h1>login page</h1>
-      <InputBox
-        labelName="email"
-        inputType="email"
-        placeHolder="email을 입력하세요"
-        runFunction={setUpInputValue}
-      />
-      <InputBox
-        labelName="password"
-        inputType="password"
-        placeHolder="비밀번호를 입력하세요"
-        runFunction={setUpInputValue}
-      />
-      <ButtonBox buttonName="login" runFunction={tryOnLogin} />
+      <div>
+        <InputBox
+          labelName="email"
+          inputType="email"
+          placeHolder="email을 입력하세요"
+          runFunction={setUpInputValue}
+        />
+        <InputBox
+          labelName="password"
+          inputType="password"
+          placeHolder="비밀번호를 입력하세요"
+          runFunction={setUpInputValue}
+        />
+        <ButtonBox
+          buttonName="login"
+          runFunction={tryOnLogin}
+          size="big"
+          enterKeyAcitive={enterKeyAcitive}
+        />
+      </div>
     </LoginArea>
   );
 }
@@ -85,6 +98,10 @@ const LoginArea = styled.div`
   h1 {
     font-size: 50px;
     margin-bottom: 30px;
+  }
+
+  div {
+    width: 300px;
   }
 `;
 
