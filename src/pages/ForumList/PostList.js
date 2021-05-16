@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 function PostList({ postData, runFunction, name }) {
   const { title, content, isLiked, tag } = postData;
-
   return (
     <PostListArea onClick={() => runFunction(name)}>
-      <h4>{title}</h4>
+      <h4>{postData.length && title}</h4>
       <span>{content.length >= 10 ? content.slice(0, 10) : content}</span>
-      <span className={tag.color}>{tag.name}</span>
+      <Tag className={postData.length && tag.color}>
+        {postData.length && tag.name}
+      </Tag>
       <span>시간</span>
     </PostListArea>
   );
@@ -35,10 +36,10 @@ const PostListArea = styled.div`
   span {
     width: 25%;
     padding: 5px;
-    background-color: ${(props) => {
-      return props.className;
-    }};
   }
+`;
+const Tag = styled.span`
+  background-color: ${(props) => props.className};
 `;
 
 export default PostList;
